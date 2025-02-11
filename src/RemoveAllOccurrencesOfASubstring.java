@@ -1,5 +1,3 @@
-import java.util.Stack;
-
 public class RemoveAllOccurrencesOfASubstring {
     public static void main(String[] args) {
         System.out.println(removeOccurrences("daabcbaabcbc", "abc"));
