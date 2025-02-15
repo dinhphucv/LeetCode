@@ -1,28 +1,35 @@
+import java.util.ArrayList;
+
 public class ProductOfNumbers {
-    ListNode tail;
+    ArrayList<Integer> preProducts;
 
     public ProductOfNumbers() {
-        tail = null;
+        preProducts = new ArrayList<>();
     }
 
     public void add(int num) {
-        if (tail == null) {
-            tail = new ListNode(num);
+        if (num == 0) {
+            preProducts.clear();
             return;
         }
 
-        tail = new ListNode(num, tail);
+        if (preProducts.isEmpty()) {
+            preProducts.add(num);
+            return;
+        }
+
+        preProducts.add(preProducts.getLast() * num);
     }
 
     public int getProduct(int k) {
-        int product = 1;
-        ListNode current = tail;
-        while (k > 0) {
-            product = product * current.val;
-            current = current.next;
-            k++;
+        if (k > preProducts.size()) {
+            return 0;
         }
 
-        return product;
+        if (k == preProducts.size()) {
+            return preProducts.getLast();
+        }
+
+        return preProducts.getLast() / preProducts.get(preProducts.size() - k - 1);
     }
 }
